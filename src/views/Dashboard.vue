@@ -1,12 +1,11 @@
 <template>
   <div class="container mt-2">
     <b-tabs v-model="tabIndex" pills small>
-      <b-tab title="Sõnumid" class="p-0 pt-2 border-0 bg-light">
-        <b-container fluid>
-          <Messaging/>
-        </b-container>
+      <b-tab title="Sõnumid" class="p-2">
+        <Messaging/>
       </b-tab>
-      <b-tab title="Seaded">I'm the second tab</b-tab>
+      <b-tab title="Broneeringud" class="p-2"><Bookings/></b-tab>
+      <b-tab title="Seaded" class="p-2"><Settings/></b-tab>
       <b-tab title="Lapsehoidja seaded" disabled>Sibzamini!</b-tab>
     </b-tabs>
   </div>
@@ -14,11 +13,15 @@
 
 <script>
 import Messaging from "@/components/Messaging.vue";
+import Settings from "@/components/Settings.vue";
+import Bookings from "@/components/Bookings.vue";
 
 export default {
   name: "Dashboard",
   components: {
-    Messaging
+    Messaging,
+    Settings,
+    Bookings
   },
   data: function() {
     return {
