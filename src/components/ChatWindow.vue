@@ -1,6 +1,6 @@
 <template>
   <div v-if="chatId != 0">
-    <div class="messages mb-1 container-fluid">
+    <div ref="messages-ref" class="messages mb-1 container-fluid">
       <b-list-group flush>
         <b-list-group-item v-for="(message, index) in messages" :key="index" class="border-0 p-0">
           <div>
@@ -51,8 +51,10 @@ export default {
   },
   methods: {
     scrollToEnd() {
-      var container = this.$el.querySelector(".messages");
-      container.scrollTop = container.scrollHeight;
+      if (this.chatId != 0) {
+        var container = this.$refs["messages-ref"];
+        container.scrollTop = container.scrollHeight;
+      }
     },
     formatDate: function(time) {
       let date = new Date(time);
@@ -152,7 +154,7 @@ export default {
     }
   },
   mounted: function() {
-    this.$nextTick(this.scrollToEnd);
+    this.$nextTick(this.scrollToEnd());
   }
 };
 </script>
