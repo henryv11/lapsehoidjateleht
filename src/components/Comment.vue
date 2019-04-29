@@ -1,15 +1,21 @@
 <template>
   <div>
-    <b-card body-class="p-1">
+    <b-card body-class="p-1 shadow-sm">
       <b-media>
-        <b-img slot="aside" :src="comment.url" width="50" alt="placeholder" class="p-1 rounded-circle"></b-img>
-        <div class="comment-header">
+        <b-img
+          slot="aside"
+          :src="comment.url"
+          width="50"
+          alt="placeholder"
+          class="p-1 rounded-circle"
+        ></b-img>
+        <div class="comment-header d-block">
           <p class="h6">{{comment.name}}</p>
           <div class="float-right">
             <Rating :rating="comment.rating" :id="'comment-' + comment.id" :size="'sm'"/>
           </div>
         </div>
-        <hr class="my-1">
+        <hr class="my-0">
         <p class="m-0">{{comment.content}}</p>
       </b-media>
     </b-card>

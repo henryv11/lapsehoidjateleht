@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faCaretUp, faCaretDown, faStar, faStarHalf, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faCaretUp, faCaretDown, faStar, faStarHalf, faPaperPlane, faArrowAltCircleLeft, faComments, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
@@ -9,7 +9,8 @@ library.add(
     faArrowDown, faArrowUp,
     faCaretDown, faCaretUp,
     faStar, faStarHalf,
-    faPaperPlane
+    faPaperPlane, faArrowAltCircleLeft,
+    faComments, faWindowClose
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

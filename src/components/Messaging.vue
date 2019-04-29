@@ -1,17 +1,45 @@
 <template>
-  <div>
-    <b-row>
-      <b-col cols="4" class="p-1">
+  <div class="messaging-main-cointainer">
+    <div class="p-2 m-0 bg-white border rounded shadow">
+      <b-button
+        variant="link"
+        class="text-dark p-0 m-0 ml-2"
+        @click="sidebarActive = !sidebarActive"
+        v-b-tooltip.hover
+        :title="!sidebarActive ? 'Ava vestluste aken' : 'Sulge vestluste aken'"
+      >
+        <font-awesome-icon icon="comments"/>
+      </b-button>
+    </div>
+    <div
+      class="chat-window m-0 bg-white rounded border shadow"
+      :class="sidebarActive ? 'make-opaque' : ''"
+    >
+      <ChatWindow :chatId="selectedChat" :key="selectedChat"/>
+    </div>
+    <div class="chats-sidebar-container" :class="sidebarActive ? '' : 'd-none'">
+      <div class="chats-container rounded border bg-white shadow-lg">
+        <p class="lead p-3 m-0 text-primary d-inline-block">Sinu vestlused</p>
+        <b-button
+          variant="link"
+          class="text-secondary p-0 m-3 float-right"
+          @click="sidebarActive = false"
+          v-b-tooltip.hover
+          title="Sulge vestluste aken"
+        >
+          <font-awesome-icon icon="window-close"/>
+        </b-button>
+        <hr class="my-0">
         <b-list-group flush class="p-2 chats flex-column align-items-start">
           <b-list-group-item
             href="#"
-            class="p-1 mb-2 text-dark rounded shadow-sm border-0"
+            class="p-1 mb-1 rounded shadow-sm border"
             v-for="chat in chats"
             :key="chat.chatId"
-            :active="isSelected(chat.chatId)"
-            v-on:click="selectedChat = chat.chatId"
+            :class="isSelected(chat.chatId) ? 'bg-secondary' : 'bg-light'"
+            v-on:click="selectedChat = chat.chatId; sidebarActive = false"
           >
-            <b-media vertical-align="center p-0">
+            <b-media vertical-align="center ml-2">
               <b-img
                 slot="aside"
                 class="rounded-circle"
@@ -24,21 +52,24 @@
                 <div
                   v-for="name in filterNames(chat.participants)"
                   :key="name"
-                  class="float-left d-inline h6 m-0"
-                >{{name}}</div>
+                  class="float-left d-inline m-0"
+                >
+                  <p class="lead text-warning m-0 p-0">{{name}}</p>
+                </div>
               </div>
-              <div class="d-inline-block w-100">
-                <div class="small float-left last-message">{{chat.lastMessage}}</div>
+              <hr class="my-0">
+              <div
+                class="d-inline-block w-100 p-1"
+                :class="isSelected(chat.chatId) ? 'text-white' : 'text-secondary'"
+              >
+                <div class="small float-left w-75 last-message">{{chat.lastMessage}}</div>
                 <div class="small float-right">{{formatDate(chat.lastMessageTime)}}</div>
               </div>
             </b-media>
           </b-list-group-item>
         </b-list-group>
-      </b-col>
-      <b-col cols="8" class="p-1">
-        <ChatWindow/>
-      </b-col>
-    </b-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,12 +121,14 @@ export default {
   data: function() {
     return {
       userName: "Mirgel Mürgel",
-      selectedChat: Number,
+      selectedChat: 0,
+      sidebarActive: true,
       chats: [
         {
           chatId: 1,
           participants: ["Mirgel Mürgel", "Tatjana Sljuhh"],
-          lastMessage: "Tule v6ta suhu litssg sdgasdg",
+          lastMessage:
+            "Tule v6ta suhu litssg sdgasdg dsagd agdsa gdsa gasdgh afha sdgdsag dsag sdag asdg",
           lastMessageTime: new Date().getTime()
         },
         {
@@ -195,18 +228,60 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.chats {
-  overflow-y: auto;
-  max-height: calc(75vh + 3rem);
-  min-height: calc(75vh + 3rem);
+.last-message {
+  height: 1rem;
+  overflow: hidden !important;
 }
 
-.last-message {
-  max-width: 60%;
-  overflow: hidden !important;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.chat-window {
+  height: 48rem;
+  position: relative;
+  //outline: 1px solid black;
+}
+
+.chats-sidebar-container {
+  position: absolute;
+  height: 47.8rem;
+  width: 100%;
+  //outline: 1px solid black;
+}
+
+.make-opaque {
+  opacity: 0.3;
+}
+
+@media (min-width: 350px) {
+  .chats-container {
+    width: 90%;
+  }
+  .chats-sidebar-container {
+    top: 14.35rem;
+  }
+}
+
+@media (min-width: 767px) {
+  .chats-container {
+    width: 80%;
+  }
+  .chats-sidebar-container {
+    top: 10.4rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .chats-container {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .chats-container {
+    width: 40%;
+  }
+}
+
+.chats {
+  height: 44rem;
+  overflow-y: auto;
 }
 </style>
-
-

@@ -1,33 +1,43 @@
 <template>
-  <div class="sidebar make-me-sticky shadow-sm bg-white mb-2">
-    <div class="search shadow-sm p-2">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+  <div class="sidebar shadow bg-white border p-2 mb-2">
+    <div class="mb-2">
+      <p class="lead m-0 mb-2 text-secondary border-bottom">Otsi</p>
+      <input class="form-control" type="text" aria-label="Search">
     </div>
-    <div class="options p-2">
+    <div class>
+      <p class="lead mb-2 text-secondary border-bottom">Järjesta</p>
+      <FeedControls/>
+    </div>
+    <div>
+      <p class="lead text-secondary m-0 border-bottom">Filtreeri</p>
       <ul class="list-unstyled m-0">
         <li class="nav-item" v-for="(option, index) in options" :key="index">
-          <b-button
-            v-b-toggle="option.name"
-            block
-            variant="link"
-            class="toggle-button text-dark"
-            v-on:click="option.collapsed = !option.collapsed"
-          >
-            <p class="h6 float-left">{{option.name}}</p>
-            <font-awesome-icon v-if="option.collapsed" icon="angle-down" class="float-right mt-1"/>
-            <font-awesome-icon v-else icon="angle-up" class="float-right mt-1"/>
-          </b-button>
-          <b-collapse :id="option.name">
-            <b-card>
-              <b-form-group>
+          <div>
+            <b-button
+              v-b-toggle="option.name"
+              block
+              variant="link"
+              class="toggle-button text-primary p-1 mt-2 mb-2"
+              v-on:click="option.collapsed = !option.collapsed"
+            >
+              <p class="h6 float-left mb-0">{{option.name}}</p>
+              <font-awesome-icon
+                v-if="option.collapsed"
+                icon="angle-down"
+                class="float-right mt-1"
+              />
+              <font-awesome-icon v-else icon="angle-up" class="float-right mt-1"/>
+            </b-button>
+          </div>
+          <b-collapse class="p-0" :id="option.name">
+            <b-card class="border-0" body-class="p-2">
+              <b-form-group class="m-0 text-secondary">
                 <b-form-checkbox
-                v-for="value in option.values"
-                :key="value"
-                :value="value"
-                :name="option.name"
-                >
-                {{value}}
-                </b-form-checkbox>
+                  v-for="value in option.values"
+                  :key="value"
+                  :value="value"
+                  :name="option.name"
+                >{{value}}</b-form-checkbox>
               </b-form-group>
             </b-card>
           </b-collapse>
@@ -38,8 +48,12 @@
 </template>
 
 <script>
+import FeedControls from "@/components/FeedControls.vue";
 export default {
   name: "BrowseSidebar",
+  components: {
+    FeedControls
+  },
   data: function() {
     return {
       options: [
@@ -94,24 +108,4 @@ export default {
 </script>
 
 <style scoped lang="less">
-.options {
-  text-align: left;
-  overflow-y: auto;
-  max-height: 85vh;
-}
-
-.make-me-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 5rem;
-}
-
-.card {
-  border: none;
-}
-
-.card-body {
-  padding: 0;
-  padding-left: 1rem;
-}
 </style>

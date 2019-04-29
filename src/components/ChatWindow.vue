@@ -1,31 +1,35 @@
 <template>
-  <div>
+  <div v-if="chatId != 0">
     <div class="messages mb-1 container-fluid">
       <b-list-group flush>
-        <b-list-group-item v-for="(message, index) in messages" :key="index" class="border-0 p-1">
+        <b-list-group-item v-for="(message, index) in messages" :key="index" class="border-0 p-0">
           <div>
-            <p
-              class="h6 m-0"
-              v-if="nameStates[index]"
-              :class="message.senderName == userName ? 'float-left ml-2' : 'float-right mr-2'"
-            >{{message.senderName}}</p>
-            <div class="d-inline-block">
+            <div class="d-inline-block w-100">
+              <p
+                class="h6 m-0"
+                v-if="nameStates[index]"
+                :class="message.senderName == userName ? 'float-left ml-2' : 'float-right mr-2'"
+              >{{message.senderName}}</p>
+            </div>
+            <div class="d-inline-block w-100">
               <div
                 class="bubble"
-                :class="message.senderName == userName ? 'me' : 'you'"
+                :class="message.senderName == userName ? 'me text-white' : 'you'"
               >{{message.content}}</div>
             </div>
-            <p
-              class="small d-inline-block m-0 text-muted"
-              :class="message.senderName == userName ? 'float-left ml-4' : 'float-right mr-4'"
-            >{{formatDate(message.date)}}</p>
+            <div class="d-inline-block w-100">
+              <p
+                class="small m-0 text-muted"
+                :class="message.senderName == userName ? 'float-left ml-4' : 'float-right mr-4'"
+              >{{formatDate(message.date)}}</p>
+            </div>
           </div>
         </b-list-group-item>
       </b-list-group>
     </div>
     <div>
-      <b-form inline>
-        <b-form-input id="chat-input" class="mr-1 d-inline-block"></b-form-input>
+      <b-form inline class="pl-4 border-top pt-1">
+        <b-form-input id="chat-input" class="d-inline-block mr-2"></b-form-input>
         <b-button variant="link" class="text-dark send-button">
           <font-awesome-icon icon="paper-plane"/>
         </b-button>
@@ -37,6 +41,14 @@
 <script>
 export default {
   name: "ChatWindow",
+  props: {
+    chatId: {
+      type: Number,
+      default: function() {
+        return 0;
+      }
+    }
+  },
   methods: {
     scrollToEnd() {
       var container = this.$el.querySelector(".messages");
@@ -77,8 +89,7 @@ export default {
         {
           senderName: "Peeter Eeter",
           date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
+          content: "rus odioverra turpis."
         },
         {
           senderName: "Viktoria Munsus",
@@ -102,7 +113,7 @@ export default {
           senderName: "Peeter Eeter",
           date: new Date().getTime(),
           content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
+            "Cras sit amet nibh libero, in gravida nulla. Nulla velj gh osadhgasdbng naposdn adsbgpbsda pgbipasdb gipbadsp ibgpasdbgip basdipgb piasdbgip asbdsipgb spadibgpi sadbdgipbsda ipgbisadb ipgbasdip gbipsadb gpsidb gpisadbgip metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
           senderName: "Viktoria Munsus",
@@ -139,6 +150,9 @@ export default {
       }
       return nameStates;
     }
+  },
+  mounted: function() {
+    this.$nextTick(this.scrollToEnd);
   }
 };
 </script>
@@ -146,20 +160,16 @@ export default {
 <style lang="less" scoped>
 .messages {
   overflow-y: auto;
-  max-height: 75vh;
-  min-height: 75vh;
-}
-
-.send-button {
-  width: 3rem;
+  max-height: 44.5rem;
+  min-height: 44.5rem;
 }
 
 #chat-input {
-  width: calc(100% - 3.3rem);
+  width: calc(100% - 4rem);
 }
 
 .bubble {
-  background-color: #f2f2f2;
+  //background-color: #f2f2f2;
   border-radius: 0.5rem;
   box-shadow: 0 0 6px #b2b2b2;
   display: inline-block;
@@ -170,7 +180,7 @@ export default {
 }
 
 .bubble::before {
-  background-color: #f2f2f2;
+  //background-color: #f2f2f2;
   content: "\00a0";
   display: block;
   height: 16px;
@@ -185,21 +195,36 @@ export default {
 }
 
 .me {
+  background: rgb(72, 107, 190);
+  background: linear-gradient(
+    90deg,
+    rgba(72, 107, 190, 1) 0%,
+    rgba(80, 145, 222, 1) 100%
+  );
   float: left;
   margin: 5px 45px 5px 20px;
 }
 
 .me::before {
+  background: rgb(72, 107, 190);
   box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -9px;
 }
 
 .you {
+  background: rgb(218, 216, 232);
+  background: radial-gradient(
+    circle,
+    rgba(218, 216, 232, 1) 1%,
+    rgba(232, 231, 244, 1) 83%,
+    rgba(235, 235, 235, 1) 100%
+  );
   float: right;
   margin: 5px 20px 5px 45px;
 }
 
 .you::before {
+  background: #ebebeb;
   box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
   right: -9px;
 }

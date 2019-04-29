@@ -4,12 +4,14 @@
     scrollable
     hide-footer
     id="comments-modal"
-    title="Teiste hinnangud"
+    title="Vaata hinnanguid"
     size="lg"
     body-class="p-0 pt-2 pb-2"
   >
     <b-container fluid>
       <div class="mb-2">
+        <p class="h5">Hinnangute statistika</p>
+        <hr class="my-2">
         <b-list-group>
           <b-list-group-item v-for="rating in ratingReport" :key="rating.rating" class="p-0">
             <b-row class="p-1 pl-4 pr-4">
@@ -26,7 +28,11 @@
           </b-list-group-item>
         </b-list-group>
       </div>
-      <Comments/>
+      <div>
+        <p class="h5">Kõik Hinnangud</p>
+        <hr class="my-2">
+        <Comments :limit="15"/>
+      </div>
     </b-container>
   </b-modal>
 </template>
@@ -39,7 +45,7 @@ export default {
   name: "CommentsModal",
   components: {
     Comments,
-    Rating
+    Rating,
   },
   data() {
     return {
@@ -69,7 +75,6 @@ export default {
       for (let i = 0; i < this.ratingReport.length; i++) {
         totalRatings += this.ratingReport[i].count;
       }
-
       for (let i = 0; i < this.ratingReport.length; i++) {
         var rating = this.ratingReport[i];
         percentages[rating.rating] = Math.round(

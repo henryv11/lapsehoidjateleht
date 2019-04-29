@@ -1,5 +1,5 @@
 <template>
-  <div class="rating-container" :id="id">
+  <div class="d-inline-block" :id="id">
     <div>
       <font-awesome-icon v-for="index in fullStars" :key="index" icon="star" :class="'fa-'+size"/>
       <font-awesome-icon v-if="halfStars > 0.1 && halfStars < 0.9" icon="star-half" :class="'fa-'+size"/>
@@ -29,9 +29,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.rating-container {
-  display: inline-block;
-}
 </style>
 
 

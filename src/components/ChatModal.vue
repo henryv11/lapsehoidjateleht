@@ -5,11 +5,9 @@
     id="chat-modal"
     title="Vestlus"
     size="lg"
-    body-class="p-0 pt-2 pb-2"
+    body-class="p-0 pb-2"
   >
-    <b-container fluid>
-      <ChatWindow ref="chat-window"/>
-    </b-container>
+    <ChatWindow ref="chat-window" :chatId="1"/>
   </b-modal>
 </template>
 

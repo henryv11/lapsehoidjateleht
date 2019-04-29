@@ -1,20 +1,27 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <ChatModal ref="chat-modal"/>
     <BookingModal ref="booking-modal"/>
     <CommentsModal ref="comments-modal"/>
+    <div class="bg-white p-2 rounded shadow-sm border mt-2">
+      <b-button variant="link" class="p-0 text-secondary">
+        <font-awesome-icon icon="arrow-alt-circle-left" class="mt-1 mr-2"/>
+        <p class="m-0 d-inline-block">Tagasi</p>
+      </b-button>
+    </div>
     <div class="row mt-2">
-      <div class="col-xl-3 col-lg-3 col-md-4">
-        <div class="container-fluid shadow-sm p-1 mb-3 bg-white">
+      <div class="col col-12 col-md-4 col-xl-3">
+        <div class="container-fluid shadow border p-1 mb-3 bg-white">
           <div class="image mb-2">
             <img :src="imgUrl" class="img-fluid" alt="Responsive image">
           </div>
-          <div class="name mb-2 text-center">
+          <div class="name mb-2 text-center p-1">
             <p class="h4">{{name}}</p>
             <hr class="my-2">
             <button
               type="button"
-              class="btn btn-outline-primary btn-sm mr-3"
+              class="btn btn-outline-primary btn-sm mr-1"
+              use-router
               @click="openChat"
             >Saada sõnum</button>
             <button
@@ -25,8 +32,8 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-6 col-lg-6 col-md-6">
-        <b-container fluid class="shadow-sm p-1 mb-3 bg-white">
+      <div class="col col-12 col-md-8 col-xl-9">
+        <b-container fluid class="shadow border p-1 mb-3 bg-white">
           <b-container fluid>
             <p class="h4 pt-2 pb-2">{{description.key}}</p>
             <ul class="list-group">
@@ -54,7 +61,7 @@
           </div>
           <div class="container-fluid">
             <p class="h4 pt-2 pb-2">Teiste hinnangud</p>
-            <Comments/>
+            <Comments :limit="3" :pageable="false"/>
             <b-button block variant="link" class="pt-0 pb-3" @click="openComments">Vaata rohkem</b-button>
           </div>
         </b-container>
@@ -130,6 +137,13 @@ export default {
 <style lang="less" scoped>
 .list-group-item {
   padding: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+    max-width: none;
+  }
 }
 </style>
 

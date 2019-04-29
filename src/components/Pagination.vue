@@ -1,6 +1,6 @@
 <template>
-  <div class="overflow-auto">
-    <b-pagination-nav :link-gen="linkGen" :number-of-pages="10" size="sm" align="fill" use-router></b-pagination-nav>
+  <div class="overflow-auto p-2">
+    <b-pagination-nav :link-gen="linkGen" :number-of-pages="10" size="sm" align="left" use-router></b-pagination-nav>
   </div>
 </template>
 

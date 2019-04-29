@@ -1,36 +1,39 @@
 <template>
   <div class="main bg-white mt-0">
+    <Pagination/>
+
     <ul class="list-unstyled">
-      <li
-        class="media shadow-sm bg-white p-2 mt-4 ml-2 mr-2"
-        v-for="(sitter, index) in sitters"
-        :key="index"
-      >
-        <img class="img-thumbnail align-self-center mr-3" :src="sitter.img" alt="Profile picture">
-        <div class="media-body">
-          <div class="d-flex bd-highlight">
-            <div class="bd-highlight">
-              <h5>{{sitter.firstName}} {{sitter.lastName}}, {{sitter.age}}</h5>
+      <li v-for="(sitter, index) in sitters" :key="index" class="m-1">
+        <b-card body-class="p-0 m-0 shadow-sm">
+          <b-media>
+            <b-img slot="aside" :src="sitter.img" alt="placeholder" class="m-2 shadow-sm rounded-circle border"></b-img>
+            <div class="comment-header pt-2">
+              <p
+                class="h5 m-0 d-inline-block"
+              >{{sitter.firstName}} {{sitter.lastName}}, {{sitter.age}}</p>
+              <div class="float-right mr-2">
+                <Rating :rating="sitter.rating" :id="'feed-sitter' + index" :size="'sm'"/>
+              </div>
             </div>
-            <div class="ml-auto bd-highlight">
-              <Rating :rating="sitter.rating" :id="'feed-sitter' + index" :size="'sm'"/>
-            </div>
-          </div>
-          <hr class="my-1">
-          <p class="lead">{{sitter.description}}</p>
-        </div>
+            <hr class="my-0">
+            <p class="lead d-block text-secondary mr-2 description">{{sitter.description}}</p>
+          </b-media>
+        </b-card>
       </li>
     </ul>
+    <Pagination/>
   </div>
 </template>
 
 <script>
 import Rating from "@/components/Rating.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "Feed",
   components: {
-    Rating
+    Rating,
+    Pagination
   },
   data: function() {
     return {
@@ -71,7 +74,7 @@ export default {
           age: "45",
           rating: 3.5,
           description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
+            "tere olen maiu ja mulle sadfgggggg gpdhsapg hweaipsgfipZ XBcvi pbSAIEfgIABN FvoBAIP FvSABFcahnso fjnwabfgisdbfvno[dngo;dsbivbips dbvfipebmeelidb munne imeda ja piimaga klistiiri teha",
           img:
             "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
         },
@@ -142,13 +145,18 @@ export default {
 </script>
 
 <style scoped lang="less">
-.img-thumbnail {
-  width: 8rem;
-  height: 8rem;
-}
 
-.media:hover {
+.card {
+  img {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+.card:hover {
   cursor: pointer;
-  transform: scale(1.003);
+  img {
+     transform: scale(1.02);
+  }
+ 
 }
 </style>
