@@ -86,51 +86,51 @@ export default {
   },
   data: function() {
     return {
-      userName: "Peeter Eeter",
+      userName: "Jüri Ivan",
       messages: [
         {
-          senderName: "Peeter Eeter",
+          senderName: "Jüri Ivan",
           date: new Date().getTime(),
           content: "rus odioverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Peeter Eeter",
+          senderName: "Jüri Ivan",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla velj gh osadhgasdbng naposdn adsbgpbsda pgbipasdb gipbadsp ibgpasdbgip basdipgb piasdbgip asbdsipgb spadibgpi sadbdgipbsda ipgbisadb ipgbasdip gbipsadb gpsidb gpisadbgip metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
         },
         {
-          senderName: "Viktoria Munsus",
+          senderName: "Mari Juurikas",
           date: new Date().getTime(),
           content:
             "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."

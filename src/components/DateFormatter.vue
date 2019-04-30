@@ -1,5 +1,5 @@
 <template>
-  <div>{{formatDate(this.date)}}</div>
+  <div class="d-inline-block">{{formatDate(this.date)}}</div>
 </template>
 
 <script>

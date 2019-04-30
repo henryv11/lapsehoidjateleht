@@ -16,7 +16,7 @@
               </div>
             </div>
             <hr class="my-0">
-            <p class="lead d-block text-secondary mr-2 description">{{sitter.description}}</p>
+            <p class="d-block text-secondary mr-2 description">{{sitter.description}}</p>
           </b-media>
         </b-card>
       </li>
@@ -39,102 +39,32 @@ export default {
     return {
       sitters: [
         {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 1,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 2.5,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 3,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
+          firstName: "Mari",
+          lastName: "Juurikas",
           age: "45",
           rating: 3.5,
           description:
-            "tere olen maiu ja mulle sadfgggggg gpdhsapg hweaipsgfipZ XBcvi pbSAIEfgIABN FvoBAIP FvSABFcahnso fjnwabfgisdbfvno[dngo;dsbivbips dbvfipebmeelidb munne imeda ja piimaga klistiiri teha",
+            "Tere, Vajuta minule peale, et minna mu profiilile.",
           img:
             "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
         },
         {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 5,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
+          firstName: "Anna",
+          lastName: "Grigorjev",
+          age: "25",
           rating: 4,
           description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
+            "Tsau, mulle meeldivad lapsed ja loomad",
           img:
             "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
         },
         {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 2,
+          firstName: "Eeva",
+          lastName: "Marius",
+          age: "23",
+          rating: 4.2,
           description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 2.5,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 1.5,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          firstName: "Maiu",
-          lastName: "Piimaauto",
-          age: "45",
-          rating: 2.6,
-          description:
-            "tere olen maiu ja mulle meelidb munne imeda ja piimaga klistiiri teha",
+            "Tere, olen Eeva jne jne",
           img:
             "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
         }

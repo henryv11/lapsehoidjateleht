@@ -120,106 +120,27 @@ export default {
   },
   data: function() {
     return {
-      userName: "Mirgel Mürgel",
+      userName: "Ivan Jüri",
       selectedChat: 0,
       sidebarActive: true,
       chats: [
         {
           chatId: 1,
-          participants: ["Mirgel Mürgel", "Tatjana Sljuhh"],
-          lastMessage:
-            "Tule v6ta suhu litssg sdgasdg dsagd agdsa gdsa gasdgh afha sdgdsag dsag sdag asdg",
+          participants: ["Ivan Jüri", "Mari Juurikas"],
+          lastMessage: "Tsau, lapsi viitsid hoida v",
           lastMessageTime: new Date().getTime()
         },
         {
           chatId: 2,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
+          participants: ["Ivan Jüri", "Laura Saun"],
+          lastMessage: "ok",
           lastMessageTime: 1555525235346
         },
         {
           chatId: 3,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
+          participants: ["Ivan Jüri", "Ilja Ilin"],
+          lastMessage: "dvjj",
           lastMessageTime: 1552955234346
-        },
-        {
-          chatId: 4,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: 1555955315170
-        },
-        {
-          chatId: 5,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 6,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 7,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 8,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 9,
-          participants: ["Mirgel Mürgel", "Tatjana Sljuhh"],
-          lastMessage: "Tule v6ta suhu litssg sdgasdg",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 10,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: 1555525235346
-        },
-        {
-          chatId: 11,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: 1552955234346
-        },
-        {
-          chatId: 12,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: 1555955315170
-        },
-        {
-          chatId: 13,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 14,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 15,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
-        },
-        {
-          chatId: 16,
-          participants: ["Mirgel Mürgel", "Sauna Laura"],
-          lastMessage: "Teeme sauna ka v",
-          lastMessageTime: new Date().getTime()
         }
       ]
     };

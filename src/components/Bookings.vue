@@ -1,9 +1,7 @@
 <template>
   <div>
-    <b-modal ref="info-modal" hide-footer title="Using Component Methods">
-      <div class="d-block text-center">
-        <h3>Hello From My Modal!</h3>
-      </div>
+    <b-modal ref="info-modal" ok-only title="Broneeringu detailid">
+      <BookingInfo :bookingId="selectedBookingId" :key="selectedBookingId"/>
     </b-modal>
     <p class="h1 display-4 m-0">Eelolevad broneeringud</p>
     <hr class="my-2">
@@ -24,22 +22,24 @@
 
 <script>
 import BookingTable from "@/components/BookingTable.vue";
+import BookingInfo from "@/components/BookingInfo.vue";
 
 export default {
   name: "Bookings",
   computed: {},
   components: {
-    BookingTable
+    BookingTable,
+    BookingInfo
   },
   methods: {
     openModal: function(bookingId) {
-      this.bookingId = bookingId;
+      this.selectedBookingId = bookingId;
       this.$refs["info-modal"].show();
     }
   },
   data: function() {
     return {
-      bookingId: 0
+      selectedBookingId: 0
     };
   }
 };

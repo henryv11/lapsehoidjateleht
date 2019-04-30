@@ -100,7 +100,7 @@ export default {
   },
   data: function() {
     return {
-      name: "Viktorija Munsus",
+      name: "Mari Juurikas",
       imgUrl:
         "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-760x506.jpg",
       description: {
@@ -117,7 +117,7 @@ export default {
           key: "Kontaktandmed",
           values: [
             { key: "Telefon", value: "5252532" },
-            { key: "Email", value: "zuka@bljad.com" },
+            { key: "Email", value: "mari.juurikas@gmail.com" },
             { key: "Asukoht", value: "Tallinn, Harjumaa" }
           ]
         },

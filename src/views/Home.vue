@@ -7,27 +7,6 @@
       <router-link class="float-right btn btn-primary" :to="{ name: 'browse'}">Vaadake lapsehoidjaid</router-link>
     </div>
   </div>
-  <!--
-  <div class="bg-image container-fluid">
-    <div class="row">
-      <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12">
-        <div class="jumbotron m-5 bg-light shadow-lg" id="opaque-jumbotron">
-          <div class="container">
-            <h1 class="display-4">Leidke hoidja oma lapsele või loomale</h1>
-            <p class="lead">Ulatuslik valik kogenenud lapsehoidjad igas Eestimaa linnas</p>
-            <hr class="my-2">
-            <div class="p-2">
-              <router-link
-                class="float-right btn btn-primary"
-                :to="{ name: 'browse'}"
-              >Vaadake lapsehoidjaid</router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  -->
 </template>
 
 <script>
