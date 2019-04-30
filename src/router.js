@@ -10,22 +10,22 @@ Vue.use(Router);
 
 const routes = [
     {
-      path: '/dashboard',
+      path: './dashboard',
       name: 'dashboard',
       component: Dashboard
     },
     {
-      path: '/browse',
+      path: './browse',
       name: 'browse',
       component: Browse
     },
     {
-      path: '/profile',
+      path: './profile',
       name: 'profile',
       component: Profile
     },
     {
-      path: '/',
+      path: './',
       name: 'home',
       component: Home
     }

@@ -6,7 +6,7 @@
     <div class="bg-white p-2 rounded shadow-sm border mt-2">
       <b-button variant="link" class="p-0 text-secondary">
         <font-awesome-icon icon="arrow-alt-circle-left" class="mt-1 mr-2"/>
-        <p class="m-0 d-inline-block">Tagasi</p>
+        <p class="m-0 d-inline-block" @click="goBack">Tagasi</p>
       </b-button>
     </div>
     <div class="row mt-2">
@@ -96,6 +96,15 @@ export default {
     },
     openComments() {
       this.$refs["comments-modal"].show();
+    },
+    goBack() {
+      this.$router.go(-1);
+    }
+  },
+  props: {
+    sitterId: {
+      type: Number,
+      default: 0
     }
   },
   data: function() {

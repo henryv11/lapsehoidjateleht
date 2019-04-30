@@ -1,15 +1,13 @@
 <template>
-  <div
-    class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white shadow-sm "
-  >
-    <h5 class="my-0 mr-md-auto font-weight-normal">Lapsehoidja.ee</h5>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white shadow-sm">
+    <router-link class="my-0 mr-md-auto font-weight-normal" :to="{ name: 'home'}">
+      <h5 class="m-0">Lapsehoidja.ee</h5>
+    </router-link>
     <nav class="my-2 my-md-0 mr-md-3">
-      <router-link class="p-2 text-dark" :to="{ name: 'profile'}">Profile</router-link>
       <router-link class="p-2 text-dark" :to="{ name: 'browse'}">Browse</router-link>
-      <router-link class="p-2 text-dark" :to="{ name: 'home'}">Home</router-link>
       <router-link class="p-2 text-dark" :to="{ name: 'dashboard'}">Dashboard</router-link>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
+    <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
   </div>
 </template>
 

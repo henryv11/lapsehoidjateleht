@@ -3,9 +3,11 @@
     <div class="p-1">
       <p class="h5 d-inline-block m-0 mr-2">Lapsehoidja:</p>
       <p class="lead d-inline-block m-0">{{booking.sitterName}}</p>
-      <b-button variant="link" size="sm" class="p-0 ml-2 mb-2">
-        <div class>Vaata profiili</div>
-      </b-button>
+      <router-link :to="{ name: 'profile'}">
+        <b-button variant="link" size="sm" class="p-0 ml-2 mb-2">
+          <div class>Vaata profiili</div>
+        </b-button>
+      </router-link>
     </div>
     <hr class="my-0">
     <div class="p-1">

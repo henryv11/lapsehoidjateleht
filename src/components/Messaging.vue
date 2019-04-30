@@ -176,7 +176,7 @@ export default {
     width: 90%;
   }
   .chats-sidebar-container {
-    top: 14.35rem;
+    top: 11.95rem;
   }
 }
 
@@ -185,7 +185,7 @@ export default {
     width: 80%;
   }
   .chats-sidebar-container {
-    top: 10.4rem;
+    top: 9.45rem;
   }
 }
 

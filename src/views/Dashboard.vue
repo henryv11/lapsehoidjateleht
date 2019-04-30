@@ -4,8 +4,12 @@
       <b-tab title="Sõnumid" class="p-2">
         <Messaging/>
       </b-tab>
-      <b-tab title="Broneeringud" class="p-2"><Bookings/></b-tab>
-      <b-tab title="Seaded" class="p-2"><Settings/></b-tab>
+      <b-tab title="Broneeringud" class="p-2">
+        <Bookings/>
+      </b-tab>
+      <b-tab title="Seaded" class="p-2">
+        <Settings/>
+      </b-tab>
       <b-tab title="Lapsehoidja seaded" disabled>Sibzamini!</b-tab>
     </b-tabs>
   </div>
