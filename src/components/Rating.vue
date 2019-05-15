@@ -1,6 +1,6 @@
 <template>
   <div class="d-inline-block" :id="id">
-    <div>
+    <div class="text-warning">
       <font-awesome-icon v-for="index in fullStars" :key="index" icon="star" :class="'fa-'+size"/>
       <font-awesome-icon v-if="halfStars > 0.1 && halfStars < 0.9" icon="star-half" :class="'fa-'+size"/>
       <font-awesome-icon v-else-if="halfStars >= 0.9" icon="star" :class="'fa-'+size"/>

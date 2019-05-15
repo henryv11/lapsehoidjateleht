@@ -1,22 +1,29 @@
 <template>
-  <div class="container">
-    <ChatModal ref="chat-modal"/>
+  <div class="container" v-if="!loading" :key="loading">
+    <ChatModal
+      ref="chat-modal"
+      :sitterId="sitterId"
+      :sitterName="sitter.firstName + ' ' + sitter.lastName"
+    />
     <BookingModal ref="booking-modal"/>
-    <CommentsModal ref="comments-modal"/>
-    <div class="bg-white p-2 rounded shadow-sm border mt-2">
-      <b-button variant="link" class="p-0 text-secondary">
-        <font-awesome-icon icon="arrow-alt-circle-left" class="mt-1 mr-2"/>
-        <p class="m-0 d-inline-block" @click="goBack">Tagasi</p>
-      </b-button>
-    </div>
-    <div class="row mt-2">
-      <div class="col col-12 col-md-4 col-xl-3">
-        <div class="container-fluid shadow border p-1 mb-3 bg-white">
-          <div class="image mb-2">
-            <img :src="imgUrl" class="img-fluid" alt="Responsive image">
+    <CommentsModal :sitterId="sitterId" ref="comments-modal"/>
+    <div class="row mt-1">
+      <div class="col col-12 p-1">
+        <div class="container-fluid rounded shadow-sm border bg-white p-0">
+          <b-button variant="link" class="text-secondary" @click="goBack">
+            <p class="small m-0">
+              <font-awesome-icon icon="chevron-left" class="mr-1"/>Tagasi
+            </p>
+          </b-button>
+        </div>
+      </div>
+      <div class="col col-12 col-md-4 col-xl-3 p-1">
+        <div class="container-fluid shadow-sm border p-1 mb-3 bg-white">
+          <div class="image mb-2 rounded m-1 shadow-sm">
+            <img :src="sitter.imgUrl" class="img-fluid" alt="Responsive image">
           </div>
           <div class="name mb-2 text-center p-1">
-            <p class="h4">{{name}}</p>
+            <p class="h4">{{sitter.firstName}} {{sitter.lastName}}</p>
             <hr class="my-2">
             <button
               type="button"
@@ -32,38 +39,47 @@
           </div>
         </div>
       </div>
-      <div class="col col-12 col-md-8 col-xl-9">
-        <b-container fluid class="shadow border p-1 mb-3 bg-white">
+      <div class="col col-12 col-md-8 col-xl-9 p-1">
+        <b-container fluid class="shadow-sm border p-1 mb-3 bg-white">
           <b-container fluid>
-            <p class="h4 pt-2 pb-2">{{description.key}}</p>
-            <ul class="list-group">
-              <li class="list-group-item">{{description.value}}</li>
-            </ul>
-          </b-container>
-          <div class v-for="(data, index) in data" :key="index">
-            <b-container fluid>
-              <p class="h4 pt-2 pb-2">{{data.key}}</p>
-              <ul class="list-group">
-                <li class="list-group-item" v-for="(value, index) in data.values" :key="index">
-                  <div class="text-capitalize" v-if="value.key == 'Keskmine hinnang'">
-                    <p class="text-capitalize d-inline mr-2 h6">{{value.key}}:</p>
-                    <p class="d-inline">
-                      <Rating :rating="value.value" :id="'sitter-rating'" :size="'sm'"/>
-                    </p>
-                  </div>
-                  <div v-else>
-                    <p class="text-capitalize d-inline mr-2 h6">{{value.key}}:</p>
-                    <p class="d-inline">{{value.value}}</p>
-                  </div>
-                </li>
-              </ul>
-            </b-container>
-          </div>
-          <div class="container-fluid">
+            <p class="h4 pt-2 pb-2">Kirjeldus</p>
+            <b-list-group class="shadow-sm">
+              <b-list-group-item>{{sitter.description}}</b-list-group-item>
+            </b-list-group>
+            <p class="h4 pt-2 pb-2">Isiklikud Andmed</p>
+            <p>
+              <b-list-group class="shadow-sm">
+                <b-list-group-item>Sugu: {{sitter.sex}}</b-list-group-item>
+                <b-list-group-item>Vanus: {{sitter.age}}</b-list-group-item>
+              </b-list-group>
+            </p>
+            <p class="h4 pt-2 pb-2">Kontaktandmed</p>
+            <p>
+              <b-list-group class="shadow-sm">
+                <b-list-group-item>Telefon: {{sitter.phone}}</b-list-group-item>
+                <b-list-group-item>Email: {{sitter.email}}</b-list-group-item>
+                <b-list-group-item>Maakond: {{sitter.state}}</b-list-group-item>
+              </b-list-group>
+            </p>
+            <p class="h4 pt-2 pb-2">Kogemus Lapsehoidjana</p>
+            <p>
+              <b-list-group class="shadow-sm">
+                <b-list-group-item>
+                  Keskmine hinnang:
+                  <Rating
+                    :rating="sitter.rating"
+                    :id="'sitter-rating-' + 'sitter.rating'"
+                    :size="'sm'"
+                  />
+                </b-list-group-item>
+                <b-list-group-item>Kogemus lapsehoidjana: {{sitter.experience}} aastat</b-list-group-item>
+              </b-list-group>
+            </p>
+
             <p class="h4 pt-2 pb-2">Teiste hinnangud</p>
-            <Comments :limit="3" :pageable="false"/>
+            <Comments :limit="3" :pageable="false" :sitterId="sitterId"/>
             <b-button block variant="link" class="pt-0 pb-3" @click="openComments">Vaata rohkem</b-button>
-          </div>
+          </b-container>
         </b-container>
       </div>
     </div>
@@ -99,45 +115,32 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
+    },
+    fetchSitter() {
+      this.loading = true;
+      this.axios({
+        method: "get",
+        url: "https://my.api.mockaroo.com/profile.json?key=6a5a1640"
+      }).then(response => {
+        this.sitter = response.data;
+        this.loading = false;
+      });
     }
   },
   props: {
     sitterId: {
       type: Number,
+      required: true,
       default: 0
     }
   },
+  mounted() {
+    this.fetchSitter();
+  },
   data: function() {
     return {
-      name: "Mari Juurikas",
-      imgUrl:
-        "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-760x506.jpg",
-      description: {
-        key: "Kirjeldus",
-        value:
-          "Lorem ipsum dolor sit amet, te sea debet epicuri persecuti. Ut mel eruditi voluptaria. Putant scripserit ei quo, affert utinam mel ei, et enim cetero est. Labores blandit cu vis, te ubique feugait detracto sit. Primis fuisset laboramus vel an. Ei vim reque sonet consectetuer, ut has quem inciderint, his eu habemus eleifend partiendo"
-      },
-      data: [
-        {
-          key: "Isiklikud andmed",
-          values: [{ key: "Vanus", value: 23 }, { key: "sugu", value: "Naine" }]
-        },
-        {
-          key: "Kontaktandmed",
-          values: [
-            { key: "Telefon", value: "5252532" },
-            { key: "Email", value: "mari.juurikas@gmail.com" },
-            { key: "Asukoht", value: "Tallinn, Harjumaa" }
-          ]
-        },
-        {
-          key: "Kogemus",
-          values: [
-            { key: "Keskmine hinnang", value: 4.6 },
-            { key: "Kogemus lapsehoidjana", value: "3 aastat" }
-          ]
-        }
-      ]
+      sitter: null,
+      loading: true
     };
   }
 };

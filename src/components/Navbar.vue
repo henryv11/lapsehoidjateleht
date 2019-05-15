@@ -5,7 +5,7 @@
     </router-link>
     <nav class="my-2 my-md-0 mr-md-3">
       <router-link class="p-2 text-dark" :to="{ name: 'browse'}">Browse</router-link>
-      <router-link class="p-2 text-dark" :to="{ name: 'dashboard'}">Dashboard</router-link>
+      <router-link class="p-2 text-dark" :to="{ name: 'dashboard', params: {openTab: 0}}">Dashboard</router-link>
     </nav>
     <!--<a class="btn btn-outline-primary" href="#">Sign up</a>-->
   </div>

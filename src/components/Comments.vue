@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p v-if="rows == 0">Lapsehoidjal puuduvad hinnangud</p>
     <ul class="list-unstyled">
       <li class="m-1" v-for="(comment, index) in comments" :key="index">
         <Comment v-if="index < limit" :comment="comment"/>
@@ -21,6 +22,11 @@ export default {
   },
   props: {
     limit: Number,
+    sitterId: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     pageable: {
       type: Boolean,
       default: function() {
@@ -28,71 +34,22 @@ export default {
       }
     }
   },
+  created() {
+    var comments = this.$comments;
+    for (var i = 0; i < comments.length; i++) {
+      var comment = comments[i];
+      if (comment.id == this.sitterId) {
+        this.comments = comment.comments;
+        this.rows = comment.comments.length;
+      }
+    }
+  },
   data: function() {
     return {
       currentPage: 1,
-      comments: [
-        {
-          id: 0,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        },
-        {
-          id: 1,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        },
-        {
-          id: 2,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        },
-        {
-          id: 3,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        },
-        {
-          id: 4,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        },
-        {
-          id: 5,
-          name: "M. M.",
-          rating: 4.6,
-          url:
-            "https://www.whatsappprofiledpimages.com/wp-content/uploads/2018/12/Very-Funny-Profile-Pictures.jpg",
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
-        }
-      ]
+      comments: null,
+      rows: 0
     };
-  },
-  computed: {
-    rows() {
-      return this.comments.length;
-    }
   }
 };
 </script>

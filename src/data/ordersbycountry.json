@@ -1,0 +1,61 @@
+[{
+        "county": "Harju",
+        "orders": 5389
+    },
+    {
+        "county": "Hiiu",
+        " orders": 251
+    },
+    {
+        "county": "Saare",
+        "orders": 547
+    },
+    {
+        "county": "Lääne",
+        "orders": 1253
+    },
+    {
+        "county": "Pärnu",
+        "orders": 3523
+    },
+    {
+        "county": "Rapla",
+        "orders": 539
+    },
+    {
+        "county": "Lääne-Viru",
+        "orders": 679
+    },
+    {
+        "county": "Järva",
+        "orders": 246
+    },
+    {
+        "county": "Viljandi",
+        "orders": 1024
+    },
+    {
+        "county": "Ida-Viru",
+        "orders": 12
+    },
+    {
+        "county": "Jõgeva",
+        "orders": 635
+    },
+    {
+        "county": "Tartu",
+        "orders": 215
+    },
+    {
+        "county": "Põlva",
+        "orders": 523
+    },
+    {
+        "county": "Võru",
+        "orders": 132
+    },
+    {
+        "county": "Valga",
+        "orders": 432
+    }
+]

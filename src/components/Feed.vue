@@ -1,12 +1,12 @@
 <template>
   <div class="main bg-white mt-0">
     <ul class="list-unstyled">
-      <li v-for="(sitter, index) in sitters" :key="index" class="m-1 mb-2>">
+      <li v-for="sitter in sitters" :key="sitter.id" class="m-1 mb-2>">
         <b-card body-class="p-0 m-0 shadow-sm">
-          <b-media @click="redirectToProfile(sitter.id)">
+          <b-media @click="redirectToProfile(parseInt(sitter.id, 10))">
             <b-img
               slot="aside"
-              :src="sitter.img"
+              :src="sitter.imgUrl"
               alt="placeholder"
               class="m-2 shadow-sm rounded-circle border"
             ></b-img>
@@ -15,7 +15,7 @@
                 class="h5 m-0 d-inline-block"
               >{{sitter.firstName}} {{sitter.lastName}}, {{sitter.age}}</p>
               <div class="float-right mr-2">
-                <Rating :rating="sitter.rating" :id="'feed-sitter' + index" :size="'sm'"/>
+                <Rating :rating="sitter.rating" :id="'feed-sitter' + sitter.id" :size="'sm'"/>
               </div>
             </div>
             <hr class="my-0">
@@ -24,61 +24,45 @@
         </b-card>
       </li>
     </ul>
-    <Pagination/>
+    <b-pagination
+      v-model="currentPage"
+      class="ml-2"
+      :total-rows="rows"
+      :per-page="perPage"
+    ></b-pagination>
   </div>
 </template>
 
 <script>
 import Rating from "@/components/Rating.vue";
-import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "Feed",
   components: {
-    Rating,
-    Pagination
+    Rating
   },
   methods: {
-    redirectToProfile(sitterId) {
+    redirectToProfile(id) {
       this.$router.push({
-        path: "/profile"
+        name: "profile",
+        params: { sitterId: id }
       });
+    },
+    fetchSitters() {
+      this.axios
+        .get("https://my.api.mockaroo.com/sitter.json?key=6a5a1640")
+        .then(response => (this.sitters = response.data));
     }
+  },
+  mounted() {
+    this.fetchSitters();
   },
   data: function() {
     return {
-      sitters: [
-        {
-          id: 1,
-          firstName: "Mari",
-          lastName: "Juurikas",
-          age: "45",
-          rating: 3.5,
-          description: "Tere, Vajuta minule peale, et minna mu profiilile.",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          id: 2,
-          firstName: "Anna",
-          lastName: "Grigorjev",
-          age: "25",
-          rating: 4,
-          description: "Tsau, mulle meeldivad lapsed ja loomad",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        },
-        {
-          id: 3,
-          firstName: "Eeva",
-          lastName: "Marius",
-          age: "23",
-          rating: 4.2,
-          description: "Tere, olen Eeva jne jne",
-          img:
-            "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        }
-      ]
+      sitters: null,
+      rows: 1000,
+      perPage: 20,
+      currentPage: 1
     };
   }
 };

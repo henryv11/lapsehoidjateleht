@@ -7,7 +7,7 @@
       <b-tab title="Broneeringud" class="p-2">
         <Bookings/>
       </b-tab>
-      <b-tab title="Seaded" class="p-2">
+      <b-tab title="Seaded" class="p-2" disabled="">
         <Settings/>
       </b-tab>
       <b-tab title="Lapsehoidja seaded" disabled>Sibzamini!</b-tab>
@@ -27,10 +27,20 @@ export default {
     Settings,
     Bookings
   },
-  data: function() {
+  props: {
+    openTab: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  mounted() {
+    this.tabIndex = this.openTab
+  },
+  data() {
     return {
       tabIndex: 0
-    };
+    }
   }
 };
 </script>

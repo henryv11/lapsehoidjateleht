@@ -1,6 +1,6 @@
 <template>
   <div class="messaging-main-cointainer">
-    <div class="p-2 m-0 bg-white border rounded shadow">
+    <div class="p-2 m-0 bg-white border rounded shadow-sm">
       <b-button
         variant="link"
         class="text-dark p-0 m-0 ml-2"
@@ -10,64 +10,79 @@
       >
         <font-awesome-icon icon="comments"/>
       </b-button>
+      <b-button
+        v-if="selectedChat != 0"
+        variant="link"
+        class="text-dark p-0 m-0 mr-2 float-right"
+        @click="selectedChat = 0"
+        v-b-tooltip.hover
+        :title="'Sulge vestlus'"
+      >
+        <font-awesome-icon icon="times"/>
+      </b-button>
     </div>
-    <div
-      class="chat-window m-0 bg-white rounded border shadow"
-      :class="sidebarActive ? 'make-opaque' : ''"
-    >
-      <ChatWindow :chatId="selectedChat" :key="selectedChat"/>
-    </div>
-    <div class="chats-sidebar-container" :class="sidebarActive ? '' : 'd-none'">
-      <div class="chats-container rounded border bg-white shadow-lg">
-        <p class="lead p-3 m-0 text-primary d-inline-block">Sinu vestlused</p>
-        <b-button
-          variant="link"
-          class="text-secondary p-0 m-3 float-right"
-          @click="sidebarActive = false"
-          v-b-tooltip.hover
-          title="Sulge vestluste aken"
-        >
-          <font-awesome-icon icon="window-close"/>
-        </b-button>
-        <hr class="my-0">
-        <b-list-group flush class="p-2 chats flex-column align-items-start">
-          <b-list-group-item
-            href="#"
-            class="p-1 mb-1 rounded shadow-sm border"
-            v-for="chat in chats"
-            :key="chat.chatId"
-            :class="isSelected(chat.chatId) ? 'bg-secondary' : 'bg-light'"
-            v-on:click="selectedChat = chat.chatId; sidebarActive = false"
+    <div class="chat-window">
+      <div
+        class="chat-window m-0 bg-white rounded border shadow-sm"
+        :class="sidebarActive ? 'make-opaque' : ''"
+      >
+        <ChatWindow :chatId="selectedChat" :key="selectedChat"/>
+      </div>
+      <div
+        class="chats-sidebar-container"
+        :class="sidebarActive ? 'chats-sidebar-container' : 'd-none'"
+      >
+        <div class="chats-container rounded border bg-white shadow-sm">
+          <p class="lead p-3 m-0 text-primary d-inline-block">Sinu vestlused</p>
+          <b-button
+            variant="link"
+            class="text-secondary p-0 m-3 float-right"
+            @click="sidebarActive = false"
+            v-b-tooltip.hover
+            title="Sulge vestluste aken"
           >
-            <b-media vertical-align="center ml-2">
-              <b-img
-                slot="aside"
-                class="rounded-circle"
-                blank
-                blank-color="#ccc"
-                width="50"
-                alt="placeholder"
-              ></b-img>
-              <div class="d-inline-block w-100">
-                <div
-                  v-for="name in filterNames(chat.participants)"
-                  :key="name"
-                  class="float-left d-inline m-0"
-                >
-                  <p class="lead text-warning m-0 p-0">{{name}}</p>
+            <font-awesome-icon icon="times"/>
+          </b-button>
+          <hr class="my-0">
+          <b-list-group flush class="p-2 chats flex-column align-items-start">
+            <b-list-group-item
+              href="#"
+              class="p-1 mb-1 rounded shadow-sm border"
+              v-for="chat in chats"
+              :key="chat.chatId"
+              :class="isSelected(chat.chatId) ? 'bg-secondary' : 'bg-light'"
+              v-on:click="selectedChat = chat.chatId; sidebarActive = false"
+            >
+              <b-media vertical-align="center ml-2">
+                <b-img
+                  slot="aside"
+                  class="rounded-circle"
+                  blank
+                  blank-color="#ccc"
+                  width="50"
+                  alt="placeholder"
+                ></b-img>
+                <div class="d-inline-block w-100">
+                  <div
+                    v-for="name in filterNames(chat.participants)"
+                    :key="name"
+                    class="float-left d-inline m-0"
+                  >
+                    <p class="lead text-warning m-0 p-0">{{name}}</p>
+                  </div>
                 </div>
-              </div>
-              <hr class="my-0">
-              <div
-                class="d-inline-block w-100 p-1"
-                :class="isSelected(chat.chatId) ? 'text-white' : 'text-secondary'"
-              >
-                <div class="small float-left w-75 last-message">{{chat.lastMessage}}</div>
-                <div class="small float-right">{{formatDate(chat.lastMessageTime)}}</div>
-              </div>
-            </b-media>
-          </b-list-group-item>
-        </b-list-group>
+                <hr class="my-0">
+                <div
+                  class="d-inline-block w-100 p-1"
+                  :class="isSelected(chat.chatId) ? 'text-white' : 'text-secondary'"
+                >
+                  <div class="small float-left w-75 last-message">{{chat.lastMessage}}</div>
+                  <div class="small float-right">{{formatDate(chat.lastMessageTime)}}</div>
+                </div>
+              </b-media>
+            </b-list-group-item>
+          </b-list-group>
+        </div>
       </div>
     </div>
   </div>
@@ -157,52 +172,31 @@ export default {
 .chat-window {
   height: 48rem;
   position: relative;
-  //outline: 1px solid black;
+}
+
+.messaging-main-container {
+  position: relative;
 }
 
 .chats-sidebar-container {
   position: absolute;
-  height: 47.8rem;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 100%;
-  //outline: 1px solid black;
 }
 
 .make-opaque {
   opacity: 0.3;
 }
 
-@media (min-width: 350px) {
-  .chats-container {
-    width: 90%;
-  }
-  .chats-sidebar-container {
-    top: 11.95rem;
-  }
-}
-
-@media (min-width: 767px) {
-  .chats-container {
-    width: 80%;
-  }
-  .chats-sidebar-container {
-    top: 9.45rem;
-  }
-}
-
-@media (min-width: 1000px) {
-  .chats-container {
-    width: 60%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .chats-container {
-    width: 40%;
-  }
-}
-
 .chats {
-  height: 44rem;
+  height: 90%;
   overflow-y: auto;
+}
+
+.chats-container {
+  width: 20rem;
+  height: 100%;
 }
 </style>

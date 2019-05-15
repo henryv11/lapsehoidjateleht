@@ -5,34 +5,41 @@ import Dashboard from './views/Dashboard.vue'
 import Browse from './views/Browse.vue';
 import Profile from './views/Profile.vue';
 import Home from './views/Home.vue'
+import OwnerDashboard from './views/OwnerDashboard.vue'
 
 Vue.use(Router);
 
 const routes = [
     {
-      path: './dashboard',
+      path: '/dashboard/:openTab',
       name: 'dashboard',
+      props: true,
       component: Dashboard
     },
     {
-      path: './browse',
+      path: '/browse',
       name: 'browse',
       component: Browse
     },
     {
-      path: './profile',
+      path: '/profile/:sitterId',
       name: 'profile',
+      props: true,
       component: Profile
     },
     {
-      path: './',
+      path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/ownerdashboard',
+      name: 'ownerdashboard',
+      component: OwnerDashboard
     }
   ];
   
 export default new Router({
-  routes,
-  mode: 'history',
-  base: __dirname,
+  base:"/~heviir/kasutajaliidesed/prax4/",
+  routes
 });

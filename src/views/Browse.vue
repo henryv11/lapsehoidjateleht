@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div class="row mt-2">
-      <div class="col-12 col-md-4 col-lg-4 col-xl-3">
+    <div class="row mt-1">
+      <div class="col-12 col-md-4 col-lg-4 col-xl-3 p-1">
         <BrowseSidebar/>
       </div>
-      <div class="col-12 col-md-8 col-lg-8 col-xl-9">
-        <div class="container-fluid shadow p-1 bg-white border">
+      <div class="col-12 col-md-8 col-lg-8 col-xl-9 p-1">
+        <div class="container-fluid shadow-sm p-1 bg-white border">
           <h1 class="display-4 p-2 m-0">Lapsehoidjad</h1>
           <hr class="my-2">
           <Feed/>

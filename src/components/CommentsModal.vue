@@ -31,7 +31,7 @@
       <div>
         <p class="h5">Kõik Hinnangud</p>
         <hr class="my-2">
-        <Comments :limit="15"/>
+        <Comments :sitterId="sitterId" :limit="15"/>
       </div>
     </b-container>
   </b-modal>
@@ -45,7 +45,14 @@ export default {
   name: "CommentsModal",
   components: {
     Comments,
-    Rating,
+    Rating
+  },
+  props: {
+    sitterId: {
+      type: Number,
+      required: true,
+      default: 0
+    }
   },
   data() {
     return {

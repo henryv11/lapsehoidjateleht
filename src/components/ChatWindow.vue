@@ -1,8 +1,12 @@
 <template>
-  <div v-if="chatId != 0">
+  <div>
     <div ref="messages-ref" class="messages mb-1 container-fluid">
-      <b-list-group flush>
-        <b-list-group-item v-for="(message, index) in messages" :key="index" class="border-0 p-0">
+      <b-list-group flush v-if="chat != null">
+        <b-list-group-item
+          v-for="(message, index) in chat.messages"
+          :key="index"
+          class="border-0 p-0"
+        >
           <div>
             <div class="d-inline-block w-100">
               <p
@@ -15,13 +19,13 @@
               <div
                 class="bubble"
                 :class="message.senderName == userName ? 'me text-white' : 'you'"
-              >{{message.content}}</div>
+              >{{message.message}}</div>
             </div>
             <div class="d-inline-block w-100">
               <p
                 class="small m-0 text-muted"
                 :class="message.senderName == userName ? 'float-left ml-4' : 'float-right mr-4'"
-              >{{formatDate(message.date)}}</p>
+              >{{formatDate(message.time)}}</p>
             </div>
           </div>
         </b-list-group-item>
@@ -29,8 +33,8 @@
     </div>
     <div>
       <b-form inline class="pl-4 border-top pt-1">
-        <b-form-input id="chat-input" class="d-inline-block mr-2"></b-form-input>
-        <b-button variant="link" class="text-dark send-button">
+        <b-form-input id="chat-input" v-model="input" class="d-inline-block mr-2"></b-form-input>
+        <b-button variant="link" class="text-dark send-button" @click="sendMessage()">
           <font-awesome-icon icon="paper-plane"/>
         </b-button>
       </b-form>
@@ -39,21 +43,27 @@
 </template>
 
 <script>
+import { setInterval, clearInterval } from "timers";
+
 export default {
   name: "ChatWindow",
   props: {
-    chatId: {
+    sitterId: {
       type: Number,
-      default: function() {
-        return 0;
-      }
+      default: 0
+    },
+    sitterName: {
+      type: String,
+      default: ""
     }
   },
   methods: {
     scrollToEnd() {
       if (this.chatId != 0) {
         var container = this.$refs["messages-ref"];
-        container.scrollTop = container.scrollHeight;
+        if (container != null) {
+          container.scrollTop = container.scrollHeight;
+        }
       }
     },
     formatDate: function(time) {
@@ -82,73 +92,78 @@ export default {
           year: "numeric"
         });
       }
+    },
+    loadMessages() {
+      var chats = this.$chats;
+      for (var i = 0; i < chats.length; i++) {
+        var chat = chats[i];
+        if (chat.userId == this.userId && chat.sitterId == this.sitterId) {
+          this.chat = chat;
+        }
+      }
+      if (this.chat == null) {
+        this.chat = {
+          userId: this.userId,
+          userName: this.userName,
+          sitterId: this.sitterId,
+          sitterName: this.sitterName,
+          messages: []
+        };
+      }
+    },
+    sendMessage() {
+      this.chat.messages.push({
+        senderId: this.userId,
+        senderName: this.userName,
+        time: new Date().getTime(),
+        message: this.input
+      });
+      this.input = "";
+      this.saveMessages();
+    },
+    saveMessages() {
+      var chats = [];
+      for (var i = 0; i < this.$chats.length; i++) {
+        var chat = this.$chats[i];
+        if (chat.userId == this.userId && chat.sitterId == this.sitterId) {
+          chats.push(this.chat);
+        } else {
+          chats.push(chat);
+        }
+      }
+      this.$chats = chats;
     }
+  },
+  created() {
+    this.userId = this.$user.$userId;
+    this.userName = this.$user.$userName;
+    this.timer = setInterval(() => {
+      this.loadMessages();
+    }, 2000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   data: function() {
     return {
-      userName: "Jüri Ivan",
-      messages: [
-        {
-          senderName: "Jüri Ivan",
-          date: new Date().getTime(),
-          content: "rus odioverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Jüri Ivan",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla velj gh osadhgasdbng naposdn adsbgpbsda pgbipasdb gipbadsp ibgpasdbgip basdipgb piasdbgip asbdsipgb spadibgpi sadbdgipbsda ipgbisadb ipgbasdip gbipsadb gpsidb gpisadbgip metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        },
-        {
-          senderName: "Mari Juurikas",
-          date: new Date().getTime(),
-          content:
-            "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-        }
-      ]
+      userId: null,
+      userName: null,
+      chat: null,
+      input: "",
+      timer: ""
     };
   },
   computed: {
     nameStates() {
       var nameStates = [];
       var lastSender = "";
-      for (var i = 0; i < this.messages.length; i++) {
-        if (this.messages[i].senderName == lastSender) {
+      for (var i = 0; i < this.chat.messages.length; i++) {
+        if (this.chat.messages[i].senderName == lastSender) {
           nameStates[i] = false;
         } else {
           nameStates[i] = true;
         }
-        lastSender = this.messages[i].senderName;
+        lastSender = this.chat.messages[i].senderName;
       }
       return nameStates;
     }

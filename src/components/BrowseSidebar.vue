@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar shadow bg-white border p-2 mb-2">
+  <div class="sidebar shadow-sm bg-white border p-2 mb-2">
     <div class="mb-2">
       <p class="lead m-0 mb-2 text-secondary border-bottom">Otsi</p>
       <input class="form-control" type="text" aria-label="Search">
